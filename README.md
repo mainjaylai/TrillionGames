@@ -117,7 +117,7 @@
     public static final int YPosition = 700;//纵坐标固定
     public static final int H = 30;//高度固定
     private int length;//长度随着关卡数增加而减小
-     private int sensitivity ;//灵敏度(即每按一下键盘,木板移动的距离)
+    private int sensitivity ;//灵敏度(即每按一下键盘,木板移动的距离)
     public static final int MAXSENSI = 70;/
     public static final int MINSENSI = 10;
     private Random rand = new Random();//碰撞后随机减小或增大x轴速度
