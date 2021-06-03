@@ -13,7 +13,7 @@
 #### 1.MyFrame(主要界面类)<br></br>
 ```Java
     public boolean isGaneOver = false;//判断游戏是否结束
-    private boolean isEmpty = true;//因为砖块有延迟，所以加一个判断条件
+    private boolean isEmpty = true;//因为砖块构建有延迟，所以加一个判断条件
     public boolean isStop = false;//判断是否暂停了
     public boolean isPass = false;//判断是否通关
     private int BrickCount;//初始化砖块数目
@@ -32,11 +32,9 @@
     
     //绘图函数
      public void paint(Graphics g) {
-        synchronized (MyFrame.class) {
-            collision();//判断小球有无碰到砖块
-            stick.HitBall();//判断小球有无碰到木板
-            drawAll();//画出所有的砖块小球函数
-        }
+        collision();//判断小球有无碰到砖块
+        stick.HitBall();//判断小球有无碰到木板
+        drawAll();//画出所有的砖块小球函数
     }
     
     //碰撞函数
@@ -59,13 +57,13 @@
     }
     
     //创建砖块和小球和木棍
-    public void create(） 
+    public void create()
     
     //随机生成砖块
-    public synchronized void CreateBricks()
+    public synchronized void CreateBricks(){
+       isEmpty = false;
+    }
     
-    //构建彩蛋砖块
-    public synchronized void CreateNankai()
 ```
 #### 2.Ball(小球类)<br></br>
 ```Java
@@ -118,8 +116,8 @@
     public static final int H = 30;//高度固定
     private int length;//长度随着关卡数增加而减小
     private int sensitivity ;//灵敏度(即每按一下键盘,木板移动的距离)
-    public static final int MAXSENSI = 70;/
-    public static final int MINSENSI = 10;
+    public static final int MAXSENSI = 70;//最大木板灵敏度
+    public static final int MINSENSI = 10;//最小木板灵敏度
     private Random rand = new Random();//碰撞后随机减小或增大x轴速度
     private MyFrame jf;
     private Ball ball;
@@ -180,6 +178,7 @@
     *  写了很多`注释`。为了方便读者和老师的阅读，当然更多是为我自己改bug的方便，整个工程和全部的代码我写了很多的注释。大大提高了代码的可读性
     *  变量`修饰词`的规划化。部分应该要成为永久变量定义为public static final类型；不可获得的变量定义为private类型；另外在此类当中定义了set和get函数来改变和获得它们的值<br></br>
 * 当然，在完成这个作品之前也会遇到很多困难，但通过自己上网搜索大部分都得到了解决，因为这个游戏的`爆炸效果`和小球的`移动`。所以对线程的运用也是更加娴熟。自我感觉本次的项目中的优势：<br></br>
+    *  有`暂停`功能,暂停时可以调`木板灵敏度`和`小球下落速度`
     *  有小球碰到砖块`爆炸的效果`
     *  小球碰到木板和砖块`音乐的效果`
     *  为学校设计的[彩蛋](https://user-images.githubusercontent.com/73374331/120473037-2d48d700-c3d9-11eb-903a-28b57151f407.mov) <br></br>
