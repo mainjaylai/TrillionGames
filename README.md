@@ -9,7 +9,7 @@
 ## 二、代码关系图如下:
 ![MyFrame](https://user-images.githubusercontent.com/73374331/120478008-f970b000-c3de-11eb-855b-eb8bd72badc3.png)
 <br></br>
-## 三、主要代码和思路如下:
+## 三、关键代码和思路如下:
 #### 1.MyFrame(主要界面类)<br></br>
 ```Java
     public boolean isGaneOver = false;//判断游戏是否结束
@@ -28,6 +28,26 @@
     private void init() {
         //创建砖块和小球和木棍
         create();
+        
+        //添加键盘相应事件
+         addKeyListener(new KeyListener() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                //如果是右键则右移
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT && !isStop) {
+                    stick.setX(stick.getX() + stick.getSensitivity());
+                } 
+                //如果是左键则左移
+                else if (e.getKeyCode() == KeyEvent.VK_LEFT && !isStop) {    
+                     stick.setX(stick.getX() - stick.getSensitivity());   
+                } 
+                //空格暂停
+                else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    isStop = !isStop;
+                }
+                repaint();
+            }
+        });
     }
     
     //绘图函数
